@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediByte — Healthcare Intelligence, Simplified</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #0d1117;
+      --ink-soft:  #4a5568;
+      --paper:     #f7f4ef;
+      --cream:     #eee9e0;
+      --teal:      #0a7c6e;
+      --teal-light:#e0f2ef;
+      --teal-mid:  #12a090;
+      --accent:    #c8f0eb;
+      --border:    rgba(10,124,110,0.15);
+      --serif:     'Instrument Serif', Georgia, serif;
+      --sans:      'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1000; opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(247,244,239,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      animation: fadeDown 0.6s ease both;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--teal); font-style: italic; }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 400;
+      color: var(--ink-soft); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    .nav-cta {
+      background: var(--teal); color: #fff !important;
+      padding: 0.5rem 1.25rem; border-radius: 100px;
+      font-weight: 500 !important; font-size: 0.875rem !important;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--teal-mid) !important; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid; place-items: center;
+      padding: 8rem 2rem 5rem;
+      position: relative; overflow: hidden;
+    }
+
+    /* Decorative circle */
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--teal-light) 0%, transparent 70%);
+      right: -150px; top: 50%; transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 780px; text-align: center;
+      position: relative; z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--teal-light); color: var(--teal);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.9rem; border-radius: 100px;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--teal);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.08; letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    h1 em {
+      font-style: italic; color: var(--teal);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--ink-soft); line-height: 1.7;
+      max-width: 560px; margin: 0 auto 2.5rem;
+      font-weight: 300;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    /* ── WAITLIST FORM ── */
+    .waitlist-form {
+      display: flex; gap: 0.5rem;
+      max-width: 460px; margin: 0 auto;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+
+    .waitlist-form input {
+      flex: 1;
+      padding: 0.75rem 1.1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      background: #fff;
+      font-family: var(--sans); font-size: 0.9rem;
+      color: var(--ink); outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .waitlist-form input:focus { border-color: var(--teal); }
+    .waitlist-form input::placeholder { color: #aab4be; }
+
+    .waitlist-form button {
+      padding: 0.75rem 1.5rem;
+      background: var(--teal); color: #fff;
+      border: none; border-radius: 100px;
+      font-family: var(--sans); font-size: 0.9rem; font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .waitlist-form button:hover { background: var(--teal-mid); transform: translateY(-1px); }
+
+    .form-note {
+      font-size: 0.78rem; color: var(--ink-soft);
+      margin-top: 0.75rem;
+      animation: fadeUp 0.7s 0.5s ease both;
+    }
+
+    /* ── LOGOS ── */
+    .logos {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--cream);
+    }
+
+    .logos p {
+      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-soft); margin-bottom: 1.5rem;
+    }
+
+    .logo-row {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 3rem;
+    }
+
+    .logo-item {
+      font-family: var(--serif); font-size: 1.1rem;
+      color: #b0bec5; letter-spacing: -0.02em;
+      font-style: italic;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 7rem 2rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); font-weight: 500; margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15; letter-spacing: -0.03em;
+      max-width: 560px; margin-bottom: 4rem;
+    }
+
+    .section-title em { font-style: italic; color: var(--teal); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative; overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--teal-mid));
+      opacity: 0; transition: opacity 0.2s;
+    }
+
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(10,124,110,0.1); }
+    .feature-card:hover::before { opacity: 1; }
+
+    .feature-icon {
+      width: 44px; height: 44px;
+      background: var(--teal-light);
+      border-radius: 10px;
+      display: grid; place-items: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.3rem;
+    }
+
+    .feature-card h3 {
+      font-family: var(--serif);
+      font-size: 1.25rem; letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem; color: var(--ink-soft);
+      line-height: 1.7; font-weight: 300;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      padding: 7rem 2rem;
+      background: var(--ink);
+      color: #fff;
+      position: relative; overflow: hidden;
+    }
+
+    .how::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(10,124,110,0.3) 0%, transparent 70%);
+      left: -100px; bottom: -100px;
+      pointer-events: none;
+    }
+
+    .how-inner {
+      max-width: 1100px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+
+    .how .section-label { color: var(--accent); }
+
+    .how .section-title { color: #fff; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem; margin-top: 1rem;
+    }
+
+    .step {
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .step-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 3rem; color: var(--teal-mid);
+      line-height: 1; margin-bottom: 1rem;
+    }
+
+    .step h3 {
+      font-size: 1.05rem; font-weight: 500;
+      margin-bottom: 0.5rem; color: #fff;
+    }
+
+    .step p {
+      font-size: 0.875rem; color: rgba(255,255,255,0.55);
+      line-height: 1.7; font-weight: 300;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      padding: 8rem 2rem;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 50%, var(--teal-light), transparent);
+      pointer-events: none;
+    }
+
+    .cta-inner { position: relative; z-index: 1; }
+
+    .cta-section h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+
+    .cta-section h2 em { font-style: italic; color: var(--teal); }
+
+    .cta-section p {
+      font-size: 1.05rem; color: var(--ink-soft);
+      max-width: 460px; margin: 0 auto 2.5rem;
+      line-height: 1.7; font-weight: 300;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      background: var(--cream);
+    }
+
+    .footer-logo {
+      font-family: var(--serif); font-size: 1.1rem;
+      text-decoration: none; color: var(--ink);
+    }
+    .footer-logo span { color: var(--teal); font-style: italic; }
+
+    .footer-links {
+      display: flex; gap: 1.5rem; list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem; color: var(--ink-soft);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--teal); }
+
+    .footer-copy {
+      font-size: 0.78rem; color: #b0bec5;
+      width: 100%; text-align: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .waitlist-form { flex-direction: column; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── SUCCESS STATE ── */
+    .success-msg {
+      display: none;
+      color: var(--teal); font-size: 0.9rem; font-weight: 500;
+      margin-top: 0.75rem;
+      animation: fadeUp 0.4s ease both;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Medi<span>Byte</span></a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#waitlist" class="nav-cta">Join waitlist</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">Now in private beta</div>
+      <h1>Healthcare intelligence,<br><em>finally within reach</em></h1>
+      <p class="hero-sub">
+        MediByte transforms complex clinical and operational data into
+        clear, actionable insights — so healthcare teams can focus on
+        what matters most: patient outcomes.
+      </p>
+      <form class="waitlist-form" id="waitlistForm" onsubmit="handleSubmit(event)">
+        <input type="email" placeholder="your@email.com" required />
+        <button type="submit">Join waitlist</button>
+      </form>
+      <p class="form-note">No spam. Unsubscribe anytime.</p>
+      <p class="success-msg" id="successMsg">✓ You're on the list! We'll be in touch soon.</p>
+    </div>
+  </section>
+
+  <!-- LOGOS -->
+  <div class="logos reveal">
+    <p>Designed for teams at</p>
+    <div class="logo-row">
+      <span class="logo-item">HealthSystems</span>
+      <span class="logo-item">ClinicalOps</span>
+      <span class="logo-item">MedGroup</span>
+      <span class="logo-item">CarePath</span>
+      <span class="logo-item">BioCore</span>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <p class="section-label reveal">What we do</p>
+    <h2 class="section-title reveal">Built for the <em>complexity</em> of modern healthcare</h2>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">🧠</div>
+        <h3>AI-Powered Insights</h3>
+        <p>Surface patterns across clinical, operational, and financial data that would take analysts weeks to find — in seconds.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🔒</div>
+        <h3>HIPAA Compliant by Default</h3>
+        <p>Built with privacy at the core. Every data flow, every model, every output is designed with compliance in mind from day one.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">⚡</div>
+        <h3>Real-Time Dashboards</h3>
+        <p>Live views of patient flow, resource utilization, and outcomes. No more waiting for end-of-month reports to make decisions.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🔗</div>
+        <h3>EHR Integrations</h3>
+        <p>Connects with Epic, Cerner, and other major EHR systems out of the box. No custom engineering work required.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📊</div>
+        <h3>Predictive Analytics</h3>
+        <p>Anticipate readmissions, staffing shortfalls, and supply needs before they become problems — not after.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">👥</div>
+        <h3>Built for Care Teams</h3>
+        <p>Designed with clinicians, not just administrators. Interfaces that fit naturally into existing workflows without disruption.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="how-inner">
+      <p class="section-label reveal">How it works</p>
+      <h2 class="section-title reveal">From raw data to <em>clear decisions</em></h2>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">01</div>
+          <h3>Connect your data</h3>
+          <p>Link your EHR, billing, and operational systems in minutes using our secure, pre-built connectors.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">02</div>
+          <h3>We normalize everything</h3>
+          <p>MediByte unifies messy, disparate data sources into a clean, structured model automatically.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">03</div>
+          <h3>AI surfaces insights</h3>
+          <p>Our models continuously analyze your data and surface what needs your attention — prioritized and explained.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">04</div>
+          <h3>Your team acts faster</h3>
+          <p>Clinicians and administrators make better decisions, faster — backed by data they can actually trust.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="waitlist">
+    <div class="cta-inner">
+      <h2>Ready to see <em>MediByte</em><br>in action?</h2>
+      <p>Join the waitlist for early access. We're onboarding a select group of healthcare organizations this quarter.</p>
+      <form class="waitlist-form" style="justify-content:center" onsubmit="handleSubmit(event)">
+        <input type="email" placeholder="your@email.com" required />
+        <button type="submit">Request access</button>
+      </form>
+      <p class="form-note">No spam. Unsubscribe anytime.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="footer-logo">Medi<span>Byte</span></a>
+    <ul class="footer-links">
+      <li><a href="mailto:hello@medibyte.ai">hello@medibyte.ai</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 MediByte. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Waitlist form — replace this with your real email service later
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const email = form.querySelector('input[type="email"]').value;
+      // TODO: connect to Mailchimp / your backend here
+      console.log('Waitlist signup:', email);
+      form.style.display = 'none';
+      const msg = document.getElementById('successMsg');
+      if (msg) { msg.style.display = 'block'; }
+      // Show inline success for the CTA section form
+      const note = form.nextElementSibling;
+      if (note && !msg) {
+        note.textContent = '✓ You\'re on the list! We\'ll be in touch soon.';
+        note.style.color = 'var(--teal)';
+      }
+    }
+  </script>
+</body>
+</html>
