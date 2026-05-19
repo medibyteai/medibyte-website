@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms & Conditions — MediByte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:        #0d1117;
+      --ink-soft:   #4a5568;
+      --paper:      #f7f4ef;
+      --cream:      #eee9e0;
+      --teal:       #0a7c6e;
+      --teal-light: #e0f2ef;
+      --teal-mid:   #12a090;
+      --accent:     #c8f0eb;
+      --border:     rgba(10,124,110,0.15);
+      --serif:      'Instrument Serif', Georgia, serif;
+      --sans:       'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1000; opacity: 0.4;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(247,244,239,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      animation: fadeDown 0.6s ease both;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--teal); font-style: italic; }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 400;
+      color: var(--ink-soft); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    .nav-cta {
+      background: var(--teal); color: #fff !important;
+      padding: 0.5rem 1.25rem; border-radius: 100px;
+      font-weight: 500 !important; font-size: 0.875rem !important;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--teal-mid) !important; transform: translateY(-1px); }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+    }
+
+    /* ── Page hero ── */
+    .page-hero {
+      padding: 9rem 2rem 4rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .page-hero .eyebrow {
+      display: inline-block;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: var(--teal-light);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+    }
+
+    .page-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--teal); }
+
+    .page-hero .meta {
+      font-size: 0.875rem;
+      color: var(--ink-soft);
+    }
+
+    /* ── Content layout ── */
+    .content-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+
+    /* ── TOC ── */
+    .toc {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .toc h2 {
+      font-family: var(--serif);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+
+    .toc ol {
+      padding-left: 1.25rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem 2rem;
+    }
+
+    .toc ol li a {
+      font-size: 0.875rem;
+      color: var(--teal);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .toc ol li a:hover { color: var(--teal-mid); text-decoration: underline; }
+
+    @media (max-width: 560px) {
+      .toc ol { grid-template-columns: 1fr; }
+    }
+
+    /* ── Sections ── */
+    .section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 6rem;
+    }
+
+    .section h2 {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+
+    .section h2 .num {
+      font-style: italic;
+      color: var(--teal);
+      font-size: 1rem;
+    }
+
+    .section h3 {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin: 1.25rem 0 0.4rem;
+    }
+
+    .section p {
+      font-size: 0.9375rem;
+      line-height: 1.75;
+      color: var(--ink-soft);
+      margin-bottom: 0.75rem;
+    }
+
+    .section ul, .section ol {
+      padding-left: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .section li {
+      font-size: 0.9375rem;
+      line-height: 1.75;
+      color: var(--ink-soft);
+      margin-bottom: 0.25rem;
+    }
+
+    /* ── Highlight box ── */
+    .highlight-box {
+      background: var(--teal-light);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .highlight-box p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--teal);
+      font-weight: 500;
+    }
+
+    /* ── Contact card ── */
+    .contact-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      margin-top: 1rem;
+    }
+    .contact-card p { margin-bottom: 0.35rem; }
+    .contact-card a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+    .contact-card a:hover { text-decoration: underline; }
+
+    /* ── Back to top ── */
+    .back-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.875rem;
+      color: var(--teal);
+      text-decoration: none;
+      margin-top: 1rem;
+      transition: color 0.2s;
+    }
+    .back-top:hover { color: var(--teal-mid); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--cream);
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .footer-logo span { color: var(--teal); font-style: italic; }
+
+    .footer-links {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 0.5rem 1.5rem; list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.875rem;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--teal); }
+
+    .footer-copy {
+      font-size: 0.8125rem;
+      color: var(--ink-soft);
+      opacity: 0.7;
+    }
+
+    /* ── Reveal animation ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Medi<span>Byte</span></a>
+    <ul class="nav-links">
+      <li><a href="/#features">Features</a></li>
+      <li><a href="/#how">How it works</a></li>
+      <li><a href="/#waitlist" class="nav-cta">Join waitlist</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Page Hero ── -->
+  <section class="page-hero">
+    <span class="eyebrow">Legal</span>
+    <h1>Terms &amp; <em>Conditions</em></h1>
+    <p class="meta">Effective date: May 19, 2026 &nbsp;·&nbsp; Last updated: May 19, 2026</p>
+  </section>
+
+  <!-- ── Main Content ── -->
+  <main class="content-wrap">
+
+    <p style="font-size:0.9375rem;line-height:1.75;color:var(--ink-soft);margin-bottom:2rem;">
+      Please read these Terms &amp; Conditions carefully before authorizing MediByte to access your healthcare data. By clicking "Authorize," creating an account, or using the HealthMint application, you agree to be bound by these terms.
+    </p>
+
+    <!-- Table of Contents -->
+    <nav class="toc" aria-label="Table of contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#acceptance">Acceptance of Terms</a></li>
+        <li><a href="#services">Description of Services</a></li>
+        <li><a href="#data-authorization">Healthcare Data Authorization</a></li>
+        <li><a href="#hipaa">HIPAA &amp; Privacy</a></li>
+        <li><a href="#eligibility">Eligibility &amp; Accounts</a></li>
+        <li><a href="#family">Family Accounts</a></li>
+        <li><a href="#third-party">Third-Party Integrations</a></li>
+        <li><a href="#ai">AI-Generated Insights</a></li>
+        <li><a href="#security">Security &amp; Data Storage</a></li>
+        <li><a href="#prohibited">Prohibited Uses</a></li>
+        <li><a href="#termination">Termination &amp; Data Deletion</a></li>
+        <li><a href="#disclaimer">Disclaimers &amp; Liability</a></li>
+        <li><a href="#changes">Changes to These Terms</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ol>
+    </nav>
+
+    <!-- 1 -->
+    <section id="acceptance" class="section reveal">
+      <h2><span class="num">01</span> Acceptance of Terms</h2>
+      <p>
+        These Terms &amp; Conditions ("Terms") constitute a legally binding agreement between you ("User," "you") and MediByte, Inc. ("MediByte," "we," "us") governing your use of the HealthMint platform, including all related web and mobile applications, APIs, and connected services (collectively, the "Service").
+      </p>
+      <p>
+        If you do not agree with any part of these Terms, you must not use the Service or authorize access to your healthcare data. Your continued use of the Service after any modification to these Terms constitutes your acceptance of the revised Terms.
+      </p>
+    </section>
+
+    <!-- 2 -->
+    <section id="services" class="section reveal">
+      <h2><span class="num">02</span> Description of Services</h2>
+      <p>
+        HealthMint is a personal health intelligence platform that aggregates your health and medical data from connected sources, analyzes it using artificial intelligence, and presents actionable insights to help you and your family make informed healthcare decisions.
+      </p>
+      <p>Core services include:</p>
+      <ul>
+        <li>Aggregation of health data from connected insurance providers and wearable devices</li>
+        <li>AI-powered analysis of claims, benefits, and health trends</li>
+        <li>Family health management with consolidated views across household members</li>
+        <li>Personalized health recommendations and benefit optimization suggestions</li>
+        <li>Secure storage and organization of health records</li>
+      </ul>
+      <div class="highlight-box">
+        <p>HealthMint is a health management tool and is not a licensed medical provider. Nothing in the Service constitutes medical advice, diagnosis, or treatment.</p>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section id="data-authorization" class="section reveal">
+      <h2><span class="num">03</span> Healthcare Data Authorization</h2>
+      <h3>What you are authorizing</h3>
+      <p>
+        When you connect a data source, you explicitly authorize MediByte to access, retrieve, store, and process the following categories of health data on your behalf:
+      </p>
+      <ul>
+        <li>Insurance claims, Explanation of Benefits (EOB), and coverage details</li>
+        <li>Prescription history and medication records</li>
+        <li>Lab results, diagnostic reports, and clinical notes (where available)</li>
+        <li>Wearable and fitness device data (activity, heart rate, sleep, etc.)</li>
+        <li>Provider and care team information</li>
+      </ul>
+      <h3>Scope and duration</h3>
+      <p>
+        Your authorization permits ongoing data access for as long as the connection remains active. You may revoke authorization for any connected source at any time from your account settings. Revoking access stops future data retrieval but does not automatically delete previously collected data unless you also submit a deletion request.
+      </p>
+      <h3>Data use</h3>
+      <p>
+        Authorized data is used solely to provide, improve, and personalize the Service for you. MediByte does not sell your individually identifiable health information to third parties. Aggregate, de-identified data may be used for product improvement and research in accordance with our <a href="/privacy" style="color:var(--teal);">Privacy Policy</a>.
+      </p>
+    </section>
+
+    <!-- 4 -->
+    <section id="hipaa" class="section reveal">
+      <h2><span class="num">04</span> HIPAA &amp; Privacy</h2>
+      <p>
+        MediByte is a HIPAA-covered entity and treats Protected Health Information (PHI) in accordance with the Health Insurance Portability and Accountability Act of 1996 and its implementing regulations (collectively, "HIPAA"). We maintain administrative, physical, and technical safeguards required by HIPAA's Security Rule.
+      </p>
+      <p>Key commitments include:</p>
+      <ul>
+        <li>PHI is encrypted in transit (TLS 1.2+) and at rest (AES-256)</li>
+        <li>Access to PHI is role-based and logged for audit purposes</li>
+        <li>We execute Business Associate Agreements (BAAs) with all sub-processors handling PHI</li>
+        <li>You have the right to access, correct, and request deletion of your PHI</li>
+        <li>Breach notification will be provided as required by the HIPAA Breach Notification Rule</li>
+      </ul>
+      <p>
+        For full details on how we collect, use, and protect your information, please review our <a href="/privacy" style="color:var(--teal);">Privacy Policy</a>.
+      </p>
+    </section>
+
+    <!-- 5 -->
+    <section id="eligibility" class="section reveal">
+      <h2><span class="num">05</span> Eligibility &amp; Accounts</h2>
+      <p>To use HealthMint you must:</p>
+      <ul>
+        <li>Be at least 18 years of age, or have verifiable parental or guardian consent</li>
+        <li>Be a resident of the United States</li>
+        <li>Provide accurate, complete, and current registration information</li>
+        <li>Maintain the security of your account credentials</li>
+      </ul>
+      <p>
+        You are responsible for all activity that occurs under your account. Notify us immediately at <a href="mailto:security@medibyte.ai" style="color:var(--teal);">security@medibyte.ai</a> if you suspect unauthorized access to your account.
+      </p>
+      <p>
+        Authentication is provided via Microsoft Entra External ID. Your use of authentication services is also subject to Microsoft's applicable terms of service.
+      </p>
+    </section>
+
+    <!-- 6 -->
+    <section id="family" class="section reveal">
+      <h2><span class="num">06</span> Family Accounts</h2>
+      <p>
+        HealthMint supports family accounts with an unlimited number of household members. The account holder who creates the family account ("Account Administrator") assumes responsibility for:
+      </p>
+      <ul>
+        <li>Obtaining valid authorization and consent from each adult family member added to the account</li>
+        <li>Ensuring appropriate parental or guardian consent for minor dependents</li>
+        <li>Managing access permissions for each family member</li>
+        <li>All activity conducted through the family account</li>
+      </ul>
+      <p>
+        Each adult family member added to the account will be asked to provide individual consent before their health data is accessed. Health data belonging to different family members is logically separated; the Account Administrator has view-only access to family member data as permitted by the connected data sources and applicable law.
+      </p>
+      <div class="highlight-box">
+        <p>Minor dependents' health data is managed by the Account Administrator acting as parent or legal guardian. This access terminates automatically when the dependent reaches 18 years of age.</p>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section id="third-party" class="section reveal">
+      <h2><span class="num">07</span> Third-Party Integrations</h2>
+      <p>
+        HealthMint connects to third-party services to retrieve your health data. Current integrations include:
+      </p>
+      <ul>
+        <li><strong>Aetna</strong> — insurance claims, benefits, and coverage data via FHIR API</li>
+        <li><strong>Samsung Health</strong> — wearable activity and biometric data</li>
+      </ul>
+      <p>
+        Additional integrations are planned and will be disclosed at the time of connection. Your use of each integration is subject to the terms of service and privacy policies of those third-party providers. MediByte is not responsible for the accuracy or completeness of data provided by third parties, or for any changes those providers make to their data-sharing policies.
+      </p>
+      <p>
+        By connecting a third-party service, you represent that you have the right to authorize MediByte to access data held by that service on your behalf.
+      </p>
+    </section>
+
+    <!-- 8 -->
+    <section id="ai" class="section reveal">
+      <h2><span class="num">08</span> AI-Generated Insights</h2>
+      <p>
+        HealthMint uses large language model (LLM) AI technology to analyze your health data and generate personalized insights, summaries, and recommendations. You acknowledge and agree that:
+      </p>
+      <ul>
+        <li>AI-generated insights are informational only and do not constitute medical advice</li>
+        <li>AI outputs may contain errors, omissions, or outdated information</li>
+        <li>You should consult a qualified healthcare provider before making any medical or clinical decisions</li>
+        <li>Your health data submitted for analysis is processed through a de-identification pipeline before being sent to AI model providers; raw PHI is never transmitted to third-party AI services</li>
+      </ul>
+      <p>
+        MediByte makes no warranty regarding the accuracy, completeness, or fitness for purpose of any AI-generated insight.
+      </p>
+    </section>
+
+    <!-- 9 -->
+    <section id="security" class="section reveal">
+      <h2><span class="num">09</span> Security &amp; Data Storage</h2>
+      <p>
+        All data is stored and processed on Microsoft Azure infrastructure located within the United States. MediByte employs industry-standard security controls including:
+      </p>
+      <ul>
+        <li>End-to-end encryption for data in transit and at rest</li>
+        <li>Multi-factor authentication for all internal access to production systems</li>
+        <li>Regular third-party security audits and penetration testing</li>
+        <li>Automated monitoring and anomaly detection</li>
+        <li>Disaster recovery and business continuity procedures</li>
+      </ul>
+      <p>
+        While we take reasonable precautions to protect your data, no method of transmission over the internet or electronic storage is completely secure. You use the Service at your own risk.
+      </p>
+    </section>
+
+    <!-- 10 -->
+    <section id="prohibited" class="section reveal">
+      <h2><span class="num">10</span> Prohibited Uses</h2>
+      <p>You agree not to use the Service to:</p>
+      <ul>
+        <li>Misrepresent your identity or impersonate another person</li>
+        <li>Access another person's health data without their explicit consent</li>
+        <li>Attempt to reverse engineer, scrape, or circumvent any security feature of the Service</li>
+        <li>Use the Service for any unlawful purpose or in violation of any applicable regulation, including HIPAA</li>
+        <li>Transmit malware, viruses, or other harmful code</li>
+        <li>Interfere with the integrity or performance of the Service or its underlying infrastructure</li>
+      </ul>
+      <p>
+        Violation of these prohibitions may result in immediate account suspension and referral to law enforcement where appropriate.
+      </p>
+    </section>
+
+    <!-- 11 -->
+    <section id="termination" class="section reveal">
+      <h2><span class="num">11</span> Termination &amp; Data Deletion</h2>
+      <p>
+        You may close your account at any time by contacting us at <a href="mailto:hello@medibyte.ai" style="color:var(--teal);">hello@medibyte.ai</a>. Upon account closure:
+      </p>
+      <ul>
+        <li>All active data-source connections will be revoked</li>
+        <li>Your personally identifiable data will be deleted within 30 days, subject to any legal retention obligations</li>
+        <li>De-identified, aggregated data derived from your usage may be retained for product improvement purposes</li>
+      </ul>
+      <p>
+        MediByte reserves the right to suspend or terminate your account at its sole discretion if you violate these Terms, with or without prior notice.
+      </p>
+      <p>
+        You may also submit a standalone data deletion request at any time without closing your account by emailing <a href="mailto:privacy@medibyte.ai" style="color:var(--teal);">privacy@medibyte.ai</a>.
+      </p>
+    </section>
+
+    <!-- 12 -->
+    <section id="disclaimer" class="section reveal">
+      <h2><span class="num">12</span> Disclaimers &amp; Liability</h2>
+      <h3>No medical advice</h3>
+      <p>
+        HealthMint is not a licensed medical provider. The Service and all content, insights, and recommendations are provided for informational purposes only. Always seek the advice of a qualified physician or other qualified health provider with any questions you may have regarding a medical condition.
+      </p>
+      <h3>Limitation of liability</h3>
+      <p>
+        To the maximum extent permitted by applicable law, MediByte and its officers, directors, employees, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses, resulting from your use or inability to use the Service.
+      </p>
+      <h3>Disclaimer of warranties</h3>
+      <p>
+        The Service is provided on an "as is" and "as available" basis without warranties of any kind, either express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement.
+      </p>
+    </section>
+
+    <!-- 13 -->
+    <section id="changes" class="section reveal">
+      <h2><span class="num">13</span> Changes to These Terms</h2>
+      <p>
+        We may update these Terms from time to time. When we make material changes, we will notify you by email or via a prominent notice within the Service at least 14 days before the changes take effect. Your continued use of the Service after the effective date of any changes constitutes your acceptance of the revised Terms.
+      </p>
+      <p>
+        We encourage you to review these Terms periodically. The current version is always available at <strong>medibyte.ai/terms</strong>.
+      </p>
+    </section>
+
+    <!-- 14 -->
+    <section id="contact" class="section reveal">
+      <h2><span class="num">14</span> Contact Us</h2>
+      <p>If you have questions about these Terms or wish to exercise your data rights, please reach out:</p>
+      <div class="contact-card">
+        <p><strong>MediByte, Inc.</strong></p>
+        <p>General inquiries: <a href="mailto:hello@medibyte.ai">hello@medibyte.ai</a></p>
+        <p>Privacy &amp; data requests: <a href="mailto:privacy@medibyte.ai">privacy@medibyte.ai</a></p>
+        <p>Security issues: <a href="mailto:security@medibyte.ai">security@medibyte.ai</a></p>
+      </div>
+    </section>
+
+    <a href="#" class="back-top">↑ Back to top</a>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <a href="/" class="footer-logo">Medi<span>Byte</span></a>
+    <ul class="footer-links">
+      <li><a href="mailto:hello@medibyte.ai">hello@medibyte.ai</a></li>
+      <li><a href="/privacy">Privacy Policy</a></li>
+      <li><a href="/terms">Terms</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 MediByte. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
